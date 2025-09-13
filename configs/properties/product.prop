@@ -26,6 +26,9 @@ ro.lmk.downgrade_pressure=25
 ro.lmk.upgrade_pressure=80
 ro.lmk.swap_free_low_percentage=15
 
+# Skia tracing
+debug.hwui.skia_atrace_enabled=false
+
 # RKPD
 remote_provisioning.connect_timeout_millis=2000
 remote_provisioning.enable_rkpd=true
