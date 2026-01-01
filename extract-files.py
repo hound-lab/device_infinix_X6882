@@ -106,6 +106,8 @@ blob_fixups: blob_fixups_user_type = {
         .add_needed('libcamera_metadata_shim.so'),
     'vendor/lib64/vendor.silead.hardware.fingerprintext@1.0.so': blob_fixup()
         .replace_needed('libhidlbase.so', 'libhidlbase-v31.so'),
+    ('vendor/lib64/nfc_nci.thn31nfc.tms.so', 'vendor/lib64/tms-utils.so'): blob_fixup()
+        .add_needed('libbase_shim.so'),
 }  # fmt: skip
 
 module = ExtractUtilsModule(

@@ -637,20 +637,26 @@ on post-fs-data
     chmod 0440 /dev/mcupm
     chown root system /dev/mcupm
 
-    #EM of MT6360
-    chmod 0664 sys/kernel/debug/rt-regmap/mt6360_pmu.5-0034/data
-    chmod 0664 sys/kernel/debug/rt-regmap/mt6360_pmic.5-001a/data
-    chmod 0664 sys/kernel/debug/rt-regmap/mt6360_ldo.5-0064/data
-    chmod 0664 sys/kernel/debug/rt-regmap/mt6360-4e/data
-    chmod 0664 sys/kernel/debug/rt-regmap/mt6360_pmu.5-0034/reg_addr
-    chmod 0664 sys/kernel/debug/rt-regmap/mt6360_pmic.5-001a/reg_addr
-    chmod 0664 sys/kernel/debug/rt-regmap/mt6360_ldo.5-0064/reg_addr
-    chmod 0664 sys/kernel/debug/rt-regmap/mt6360-4e/reg_addr
-
 	#widevine driver node
 	chmod 0660 /dev/drm_wv
 	chown media system /dev/drm_wv
 
+    # NFC Modules
+    chmod 0660 /dev/pn553
+    chown nfc nfc /dev/pn553
+
+    mkdir /data/vendor/nfc_socket 0770 nfc nfc
+    mkdir /data/vendor 0777 nfc nfc
+    mkdir /data/vendor/nfc 0777 nfc nfc
+    mkdir /data/vendor/nfc/param 0777 nfc nfc
+    chmod 0660 /dev/tms_nfc
+    chown nfc nfc /dev/tms_nfc
+    chown nfc nfc /sys/nfc/chip_name
+
+    mkdir /data/vendor/secure_element 0777  secure_element secure_element
+    chmod 0660 /dev/tms_ese
+    chown secure_element secure_element /dev/tms_ese
+    
 on boot
     write /proc/sys/vm/dirty_writeback_centisecs 300
     chmod 0660 /sys/power/autosleep

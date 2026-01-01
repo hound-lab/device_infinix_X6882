@@ -28,6 +28,11 @@ genfscon proc /gesture_state                                                    
 # Graphics
 genfscon sysfs /devices/platform/soc/13000000.mali u:object_r:sysfs_gpu:s0
 
+# NFC
+genfscon sysfs /nfc/chip_name u:object_r:vendor_sysfs_nfc_chip_name:s0
+genfscon sysfs /devices/platform/soc/11015000.i2c/i2c-3/3-0028/chip_name u:object_r:vendor_sysfs_nfc_chip_name:s0
+genfscon sysfs /devices/platform/11004000.i2c7/i2c-7/7-002b/chip_name u:object_r:vendor_sysfs_nfc_chip_name:s0
+
 # Power
 genfscon sysfs /devices/platform/13000000.mali/js_ctx_scheduling_mode                   u:object_r:sysfs_gpu:s0
 genfscon sysfs /devices/platform/13000000.mali/js_scheduling_period                   u:object_r:sysfs_gpu:s0
