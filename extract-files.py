@@ -20,7 +20,7 @@ from extract_utils.main import (
 )
 
 namespace_imports = [
-    'device/infinix/X6837',
+    'device/infinix/X6882',
     'hardware/mediatek',
     'hardware/mediatek/libmtkperf_client',
     'hardware/transsion',
@@ -104,12 +104,12 @@ blob_fixups: blob_fixups_user_type = {
         .replace_needed('libbinder.so', 'libbinder-v31.so')
         .replace_needed('libutils.so', 'libutils-v31.so')
         .add_needed('libcamera_metadata_shim.so'),
-    'vendor/lib64/libvendor.goodix.hardware.biometrics.fingerprint@2.1.so': blob_fixup()
+    'vendor/lib64/vendor.silead.hardware.fingerprintext@1.0.so': blob_fixup()
         .replace_needed('libhidlbase.so', 'libhidlbase-v31.so'),
 }  # fmt: skip
 
 module = ExtractUtilsModule(
-    'X6837',
+    'X6882',
     'infinix',
     blob_fixups=blob_fixups,
     lib_fixups=lib_fixups,

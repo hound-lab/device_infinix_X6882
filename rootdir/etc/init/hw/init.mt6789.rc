@@ -1,20 +1,28 @@
 import /vendor/etc/init/hw/init.connectivity.rc
 import /vendor/etc/init/hw/init.mt6789.usb.rc
+import /vendor/etc/init/hw/init.mtkgki.rc
 import /vendor/etc/init/hw/init.project.rc
 import /vendor/etc/init/hw/init.sensor_2_0.rc
 import /vendor/etc/init/hw/init.mt6789.power.rc
 import /vendor/etc/init/hw/init.modem.rc
 
 on init
-# increase sysctl_rmem_max and sysctl_wmem_max values to 2M
-    write /proc/sys/net/core/wmem_max 8388608
-    write /proc/sys/net/core/rmem_max 8388608
-
-   # Setup runtime blkio
+# Setup runtime blkio
     write /dev/blkio/blkio.weight 1000
     write /dev/blkio/background/blkio.weight 200
     write /dev/blkio/blkio.group_idle 2000
     write /dev/blkio/background/blkio.group_idle 0
+
+# change lk_env permission
+    chown root system /proc/lk_env
+    chmod 0660 /proc/lk_env
+
+# increase sysctl_rmem_max and sysctl_wmem_max values to 2M
+    write /proc/sys/net/core/wmem_max 8388608
+    write /proc/sys/net/core/rmem_max 8388608
+
+on late-init
+    write /sys/kernel/rcu_expedited 1
 
 on property:init.svc.vendor.charger=running
     chmod 0660 /dev/spm
@@ -51,6 +59,7 @@ on fs
 on late-fs
     mount_all --late
 
+
 on post-fs
     #change permissions for mediaserver
     chown root media /proc/clkmgr/mipi_test
@@ -82,8 +91,6 @@ on post-fs
     chown root system /proc/ccci_dump
 
 on post-fs-data
-    wait_for_prop vendor.all.modules.ready 1
-
     chown system system /mnt/vendor/nvcfg
     chmod 0771 /mnt/vendor/nvcfg
     restorecon_recursive /mnt/vendor/nvcfg
@@ -96,10 +103,6 @@ on post-fs-data
     chown root system /mnt/vendor/nvdata
     chmod 0771 /mnt/vendor/nvdata
     mkdir /mnt/vendor/nvdata/media 0771 media audio
-
-    # Audio dump
-    mkdir /data/vendor/audiohal 0771 system audio
-    mkdir /data/vendor/audiohal/audio_param 0771 system audio
 
     #Create cct mount point
     mkdir /mnt/vendor/cct
@@ -196,6 +199,8 @@ on post-fs-data
     #chmod 666 /dev/mali0
     #chown system graphics /dev/mali
 
+
+
     # Touch Panel
     # chmod 0664 /dev/touch
     chown root diag /sys/module/tpd_setting/parameters/tpd_calmat
@@ -220,12 +225,23 @@ on post-fs-data
     chmod 660 /dev/alarm
     chown root system /dev/alarm
 
+    # M4U
+    #insmod /vendor/lib/modules/m4u.ko
+    #mknod /dev/M4U_device c 188 0
+    chmod 0444 /dev/m4u
+    #chown system media /dev/M4U_device
+    chmod 0640 /proc/m4u
+    chown system media /proc/m4u
+
+    #set mlock limit to infinate (for m4u operation)
+    setrlimit 8 -1 -1
+
     # CMDQ
     chmod 0640 /dev/mtk_mdp
     chown system system /dev/mtk_mdp
 
     # MDP SYNC
-    chmod 0644 /dev/mdp_sync
+    chmod 0640 /dev/mdp_sync
     chown system system /dev/mdp_sync
 
     # MML PQ
@@ -251,14 +267,24 @@ on post-fs-data
 
     #Fingerprint
     chmod 0666 /dev/goodix_fp
+    chmod 0666 /dev/silead_fp
+    chmod 0666 /dev/jiiov_fp
+    #qing.li ck7n p1 bring up start
+    chmod 0666 /sys/class/leds/lcd-backlight/brightness
+    chmod 0666 /sys/devices/platform/soc/14013000.dsi/lcm_hbm_state
+    #qing.li ck7n p1 bring up end
+    #BSP:add fp by yan.wen 20240328 start
+    chmod 0666 /sys/kernel/tran_display/lcm_name
+    chmod 0666 /sys/kernel/tran_display/lcm_hbm_state
+    #BSP:add fp by yan.wen 20240328 end
 
     #v4l2 codec
     chmod 0660 /dev/vcu
     chown media system /dev/vcu
-    chmod 0666 /dev/video0
-    chown mediacodec system /dev/video0
-    chmod 0666 /dev/video1
-    chown mediacodec system /dev/video1
+    chmod 0660 /dev/video0
+    chown media system /dev/video0
+    chmod 0660 /dev/video1
+    chown media system /dev/video1
     mkdir /data/vendor/vcodec 0777 media system
     mkdir /data/vendor/vcodec/log 0770 media system
     mkdir /data/vendor/vcodec/in 0770 media system
@@ -278,6 +304,10 @@ on post-fs-data
     # PMIC property
     chown radio system /sys/devices/platform/mt-pmic/low_battery_protect_stop
     chown radio system /sys/devices/platform/mt-pmic/low_battery_protect_ut
+
+    #MDDB
+    mkdir /data/vendor_de/meta 0770 system system
+    mkdir /data/vendor_de/meta/mddb 0770 system system
 
     chown system /sys/devices/platform/msensor/driver/cpsopmode
     chown system /sys/devices/platform/msensor/driver/cpsreptxy
@@ -400,9 +430,6 @@ on post-fs-data
     chown media system /dev/hdmitx
     chmod 0664 /dev/hdmitx
 
-    # FM
-    chown system system /sys/class/fm/fm/lan_enable
-    chmod 0660 /sys/class/fm/fm/lan_enable
 
     # JPEG
     chmod 0666 /proc/mtk_jpeg
@@ -420,6 +447,10 @@ on post-fs-data
     # gz device
     chmod 0660 /dev/gz_kree
     chown system system /dev/gz_kree
+
+    #ITD:add Portrait Architecture by ye.li5 20230810 start
+    mkdir /data/vendor/camera_portrait 0777 system system
+    #ITD:add Portrait Architecture by ye.li5 20230810 end
 
     #Camera
     chmod 0660 /dev/camera-sysram
@@ -495,6 +526,10 @@ on post-fs-data
     chown system camera /dev/MAINAF
     chown system camera /dev/MAIN2AF
     chown system camera /dev/MAIN3AF
+#OTP Cloud
+    chown root root /sys/class/sensordrv/tran_imgsensor/tran_imgsensor_chipid
+    chmod 0666 /sys/class/sensordrv/tran_imgsensor/tran_imgsensor_chipid
+#fake dual camera
     chown root root /sys/class/main2_light/main2_light/main2_light
     chmod 0666 /sys/class/main2_light/main2_light/main2_light
     chown system camera /dev/SUBAF
@@ -538,6 +573,9 @@ on post-fs-data
     chmod 0660 /dev/mtk_dfrc
     chown system graphics /dev/mtk_dfrc
 
+
+   #change partition permission
+
     chmod 0640 /mtd@sec_ro
     chown root system /mtd@sec_ro
 
@@ -565,6 +603,10 @@ on post-fs-data
     chmod 0664 /sys/bus/platform/drivers/emi_ctrl/concurrency_scenario
     chown media media /sys/bus/platform/drivers/emi_ctrl/concurrency_scenario
 
+    #mtk_sched
+    chmod 0660 /dev/mtk_sched
+    chown system media /dev/mtk_sched
+
     #BT SCO CVSD, for MT6572 and MT6582 CVSD codec on AP
     chmod 0660 /dev/ebc
     chown media media /dev/ebc
@@ -584,6 +626,7 @@ on post-fs-data
 
     chmod 0666 /dev/exm0
 
+
 	#Thermal
 	mkdir /data/vendor/.tp/ 0775 system system
 	mkdir /data/vendor/thermal/ 0775 system system
@@ -594,14 +637,22 @@ on post-fs-data
     chmod 0440 /dev/mcupm
     chown root system /dev/mcupm
 
+    #EM of MT6360
+    chmod 0664 sys/kernel/debug/rt-regmap/mt6360_pmu.5-0034/data
+    chmod 0664 sys/kernel/debug/rt-regmap/mt6360_pmic.5-001a/data
+    chmod 0664 sys/kernel/debug/rt-regmap/mt6360_ldo.5-0064/data
+    chmod 0664 sys/kernel/debug/rt-regmap/mt6360-4e/data
+    chmod 0664 sys/kernel/debug/rt-regmap/mt6360_pmu.5-0034/reg_addr
+    chmod 0664 sys/kernel/debug/rt-regmap/mt6360_pmic.5-001a/reg_addr
+    chmod 0664 sys/kernel/debug/rt-regmap/mt6360_ldo.5-0064/reg_addr
+    chmod 0664 sys/kernel/debug/rt-regmap/mt6360-4e/reg_addr
+
 	#widevine driver node
 	chmod 0660 /dev/drm_wv
 	chown media system /dev/drm_wv
 
 on boot
-    # start EAS+
-    write /sys/devices/system/cpu/eas/enable 1
-    
+    write /proc/sys/vm/dirty_writeback_centisecs 300
     chmod 0660 /sys/power/autosleep
 
     chmod 0664 /sys/class/leds/lcd-backlight/brightness
@@ -616,7 +667,31 @@ on boot
     chmod 0666 /sys/devices/platform/odm/odm:tran_battery/CHG_CAPACITY_TEST
     chmod 0666 /sys/devices/platform/odm/odm:tran_battery/tran_set_current
     chmod 0666 /sys/devices/platform/charger/Charger_Type
+	chown system system /sys/devices/platform/charger/tran_aichg_bigdata
+	chmod 0666 /sys/devices/platform/charger/tran_aichg_bigdata
     #BSP:add for charger&led midtest by lei.shi5 20220505 end
+    #MG-CHG(Bypass):wireless function by yongqing 20221008 start
+    chmod 0666 /sys/wireless/wireless/Rx/brushFW
+    chmod 0666 /sys/wireless/wireless/Rx/reverse_charger
+    chmod 0666 /sys/wireless/wireless/Rx/rxdetect
+    chmod 0666 /sys/wireless/wireless/Rx/fake_rx_detect
+    #MG-CHG(Bypass):wireless function by yongqing 20221008 start
+
+
+    #MG-CHG(Bypass):bypass function by yongqing 20221008 start
+    chown system system /sys/devices/platform/charger/tran_aichg_disable_charger
+    chmod 0666 /sys/devices/platform/charger/tran_aichg_disable_charger
+    chown system system /sys/devices/platform/charger/bypass_charger
+    chmod 0666 /sys/devices/platform/charger/bypass_charger
+	chown system system /sys/devices/platform/odm/odm:smart_charging/smart_charging
+	chmod 0664 /sys/devices/platform/odm/odm:smart_charging/smart_charging
+    #MG-CHG(Bypass):bypass function by yongqing 20221008 end
+
+	chown system system /sys/led/led/tran_led_cmd
+	chmod 0666 /sys/led/led/tran_led_cmd
+
+	chown system system /sys/led/led/tran_led_check
+	chmod 0666 /sys/led/led/tran_led_check
 
     chown system system /sys/devices/system/cpu/cpufreq/hotplug/cpu_num_base
     chmod 0660 /sys/devices/system/cpu/cpufreq/hotplug/cpu_num_base
@@ -642,10 +717,12 @@ on boot
     chown system system /sys/class/leds/green/trigger
     chown system system /sys/class/leds/blue/trigger
 
-#ITD:add flashlight by isp team 20220412 start
+#ITD:add flashlight by isp team 20240403 start
     chmod 0666 /sys/devices/virtual/torch/torch/torch_level
     chmod 0666 /sys/devices/virtual/sub_torch/sub_torch/sub_torch_level
-#ITD:add flashlight by isp team 20220412 end
+    chmod 0666 /sys/devices/virtual/tele_torch/tele_torch/tele_torch_level
+    chmod 0666 /sys/devices/virtual/flashlight_core/flashlight/flashlight_fault
+#ITD:add flashlight by isp team 20240403 end
     # gauge symbolic
     symlink /sys/devices/platform/soc/10026000.pwrap/10026000.pwrap:mt6366/mt6358-gauge /dev/gauge
 
@@ -654,6 +731,7 @@ on boot
     chown radio system /sys/power/tuxonice/do_hibernate
     chmod 0770 /sys/power/tuxonice
     chmod 0220 /sys/power/tuxonice/do_hibernate
+
 
 # Smartbook Handler Framework
     chown system system /sys/power/sb_state
@@ -795,33 +873,31 @@ on boot
 #Power Manager
     write /sys/power/pm_freeze_timeout 2000
 
-# end boot time fs tune
+# Battery info
+on property:persist.vendor.mediatek.fg.disable=1
+    write /dev/gauge/FG_daemon_disable 1
+
+on property:persist.vendor.mediatek.fg.force25c=1
+    write /dev/gauge/Battery_Temperature 25
+
+on property:persist.vendor.mediatek.fg.force25c=0
+    write /dev/gauge/Battery_Temperature 65535
+
+on property:persist.vendor.mediatek.fg.log.enable=1
+    write /dev/gauge/FG_daemon_log_level 7
+
+# MTK fast charging support
+on property:persist.vendor.mediatek.fast_charging.support=*
+    write /sys/devices/platform/charger/fast_chg_indicator ${persist.vendor.mediatek.fast_charging.support}
+
 on property:sys.boot_completed=1
+    restart android-hardware-media-c2-hal-1-2
+    
     # Back to default VM settings
     write /proc/sys/vm/dirty_expire_centisecs 3000
     write /proc/sys/vm/dirty_background_ratio 10
 
 on property:sys.boot_completed=1
-
-# reset mdmode when modem crash happens in ATM
-on property:vendor.mtk.md1.status=reset
-    setprop persist.vendor.atm.mdmode normal
-
-on property:sys.boot_completed=1
-    restart android-hardware-media-c2-hal-1-2
-
-on property:sys.boot_completed=1
-# Setup cpu.shares to throttle background groups (bg ~ 5% sysbg ~ 10%)
-    write /dev/cpuctl/background/cpu.shares 1024
-    write /dev/cpuctl/system-background/cpu.shares 2048
-    write /dev/cpuctl/system/cpu.shares 20480
-    # We only have system and background groups holding tasks and the groups below are empty
-    write /dev/cpuctl/camera-daemon/cpu.shares 20480
-    write /dev/cpuctl/foreground/cpu.shares 20480
-    write /dev/cpuctl/nnapi-hal/cpu.shares 20480
-    write /dev/cpuctl/rt/cpu.shares 20480
-    write /dev/cpuctl/top-app/cpu.shares 20480
-
 # Report max frequency to unity and miHoYo (HoYoverse) games tasks
     write /proc/sys/kernel/sched_lib_name "com.miHoYo.,com.HoYoverse.,UnityMain,libunity.so"
     write /proc/sys/kernel/sched_lib_mask_force 255

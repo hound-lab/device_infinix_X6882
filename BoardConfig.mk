@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-DEVICE_PATH := device/infinix/X6837
+DEVICE_PATH := device/infinix/X6882
 KERNEL_PATH := $(DEVICE_PATH)-kernel
 CONFIGS_PATH := $(DEVICE_PATH)/configs
 
@@ -58,7 +58,7 @@ BOARD_MKBOOTIMG_ARGS += --dtb_offset $(BOARD_DTB_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 
 # Bootloader
-TARGET_BOOTLOADER_BOARD_NAME := Infinix-X6837
+TARGET_BOOTLOADER_BOARD_NAME := Infinix-X6882
 TARGET_NO_BOOTLOADER := true
 
 # Broken Rules
@@ -123,7 +123,7 @@ BOARD_ODM_DLKMIMAGE_FILE_SYSTEM_TYPE := erofs
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := erofs
 BOARD_VENDOR_DLKMIMAGE_FILE_SYSTEM_TYPE := erofs
 
--include vendor/lineage/config/BoardConfigReservedSize.mk
+-include vendor/custom/config/BoardConfigReservedSize.mk
 
 TARGET_COPY_OUT_ODM_DLKM := odm_dlkm
 TARGET_COPY_OUT_PRODUCT := product
@@ -158,7 +158,7 @@ SYSTEM_EXT_PUBLIC_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/public
 BOARD_VENDOR_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
 
 # OTA assert
-TARGET_OTA_ASSERT_DEVICE := X6837,Infinix-X6837
+TARGET_OTA_ASSERT_DEVICE := X6882,Infinix-X6882
 
 # Vendor Security Patch
 VENDOR_SECURITY_PATCH := 2025-06-05
@@ -220,4 +220,4 @@ WIFI_HIDL_UNIFIED_SUPPLICANT_SERVICE_RC_ENTRY := true
 TARGET_KERNEL_SOURCE := $(KERNEL_PATH)/kernel-headers
 
 # Inherit the proprietary files
-include vendor/infinix/X6837/BoardConfigVendor.mk
+include vendor/infinix/X6882/BoardConfigVendor.mk

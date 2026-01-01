@@ -306,12 +306,6 @@ PRODUCT_PACKAGES += \
     com.android.nfc_extras \
     Tag
 
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/nfc/libnfc-nci.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nci.conf \
-    $(LOCAL_PATH)/configs/nfc/libnfc-nxp.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nxp.conf \
-    $(LOCAL_PATH)/configs/nfc/libnfc-slm.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-slm.conf \
-    $(LOCAL_PATH)/configs/nfc/libnfc-nxp_RF.conf:$(TARGET_COPY_OUT_VENDOR)/libnfc-nxp_RF.conf
-
 # Overlays
 PRODUCT_ENFORCE_RRO_TARGETS := *
 PRODUCT_PACKAGES += \
@@ -489,11 +483,6 @@ PRODUCT_PACKAGES += \
     libunwindstack.vendor \
     libutilscallstack.vendor
 
-# vndservice
-PRODUCT_PACKAGES += \
-    vndservicemanager \
-    vndservice
-    
 # Wi-Fi
 PRODUCT_PACKAGES += \
     libwifi-hal-wrapper \
@@ -503,14 +492,6 @@ PRODUCT_PACKAGES += \
     hostapd \
     libkeystore-wifi-hidl:64 \
     libkeystore-engine-wifi-hidl:64
-    
-PRODUCT_PACKAGES += \
-    android.hardware.tetheroffload.config@1.0.vendor \
-    android.hardware.tetheroffload.control@1.0.vendor \
-    android.hardware.tetheroffload.control@1.1.vendor
-    
-PRODUCT_COPY_FILES += \
-    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/configs/wifi/,$(TARGET_COPY_OUT_VENDOR)/etc/wifi)
 
 # Inherit the proprietary files
-$(call inherit-product, vendor/infinix/X6837/X6837-vendor.mk)
+$(call inherit-product, vendor/infinix/X6882/X6882-vendor.mk)

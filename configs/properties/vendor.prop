@@ -113,7 +113,6 @@ ro.incremental.enable=yes
 # HWUI
 debug.hwui.use_hint_manager=true
 debug.hwui.target_cpu_time_percent=60
-ro.hwui.render_ahead=20
 debug.sf.enable_adpf_cpu_hint=true
 
 # HWComposer
@@ -147,18 +146,10 @@ vendor.mtk.vdec.waitkeyframeforplay=9
 ro.vendor.jpeg_decode_sw_opt=1
 vendor.media.omx=0
 
-# Mediatek
-ro.vendor.mgk_name=mgk_64_entry_level_k510
-ro.vendor.mgvi_name=mgvi_64_nfc_armv82
-ro.vendor.mediatek.platform=MT6789
-ro.vendor.mediatek.version.branch=alps-mp-s0.mp1
-ro.vendor.mediatek.version.release=alps-mp-s0.mp1.rc-V15.102_reallytek.s0mp1rc.k61v1.64.bsp_P59
-
 # Misc
 persist.vendor.factory.GB2312=no
 persist.vendor.kernel.version=5
 persist.vendor.uxcompaction_enable=true
-ro.limit_cache.support=1
 ro.logd.kernel=false
 ro.vendor.efuse_writer_enable=1
 ro.vendor.mml.mtk_mml_support=0
@@ -262,11 +253,6 @@ ro.vendor.num_md_protocol=3
 ro.vendor.radio.max.multisim=dsds
 ro.vendor.sim_me_lock_mode=3
 telephony.active_modems.max_count=2
-
-# RKPD
-remote_provisioning.enable_rkpd=true
-remote_provisioning.hostname=remoteprovisioning.googleapis.com
-remote_provisioning.connect_timeout_millis=2000
 
 # Sensor
 ro.vendor.init.sensor.rc=init.sensor_2_0.rc
