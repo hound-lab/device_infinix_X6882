@@ -313,6 +313,12 @@ PRODUCT_PACKAGES += \
     WifiResNoir
 
 PRODUCT_PACKAGES += \
+    NcmTetheringOverlay
+
+PRODUCT_PACKAGES += \
+    EmptyPropsOverlay
+
+PRODUCT_PACKAGES += \
     ApertureOverlay
 
 # Permissions
