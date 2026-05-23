@@ -227,7 +227,6 @@ PRODUCT_PACKAGES += \
     init.connectivity.common.rc \
     init.connectivity.rc \
     init.insmod.sh \
-    init.insmod.mt6789.cfg \
     init.modem.rc \
     init.mt6789.power.rc \
     init.mt6789.rc \
