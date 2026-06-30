@@ -429,6 +429,9 @@ PRODUCT_PACKAGES += \
     android.hardware.sensors@2.0-subhal-impl-1.0 \
     android.hardware.sensors@2.0-ScopedWakelock.vendor:64
 
+PRODUCT_PACKAGES += \
+    sensors.dynamic_sensor_hal:64
+
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/sensors/hals.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/hals.conf
 
