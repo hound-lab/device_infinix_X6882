@@ -3,7 +3,7 @@
 
 dpm.img;AB
 gz.img;AB
-lk.img;AB
+lk.img;AB|3c30f5c5ad340a9e5f06cf659903f30160d82e80
 logo.bin:logo.img;AB|49a414625efb9b9f4ff2287206dd59b28bf93f88
 mcupm.img;AB
 md1img.img;AB
