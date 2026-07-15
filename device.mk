@@ -298,13 +298,13 @@ PRODUCT_PACKAGES += \
 # Overlays
 PRODUCT_ENFORCE_RRO_TARGETS := *
 PRODUCT_PACKAGES += \
-    FrameworksResTarget \
-    SettingsResTarget \
-    SettingsProviderResTarget \
-    SystemUIResTarget \
-    TetheringConfigTarget \
+    FrameworksResNoir \
+    SettingsResNoir \
+    SettingsProviderResNoir \
+    SystemUIResNoir \
+    TetheringConfigNoir \
     OpenDeltaOverlayMT6789 \
-    WifiResTarget
+    WifiResNoir
 
 # Permissions
 PRODUCT_COPY_FILES += \

@@ -1,4 +1,4 @@
 runtime_resource_overlay {
-    name: "SystemUIResTarget",
+    name: "FrameworksResNoir",
     vendor: true
 }
