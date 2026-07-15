@@ -301,7 +301,6 @@ PRODUCT_PACKAGES += \
     SettingsResNoir \
     SettingsProviderResNoir \
     SystemUIResNoir \
-    TetheringConfigNoir \
     OpenDeltaOverlayMT6789 \
     WifiResNoir
 
@@ -490,6 +489,9 @@ PRODUCT_PACKAGES += \
     hostapd \
     libkeystore-wifi-hidl:64 \
     libkeystore-engine-wifi-hidl:64
+
+PRODUCT_PACKAGES += \
+    NcmTetheringOverlay
 
 # Inherit the proprietary files
 $(call inherit-product, vendor/infinix/X6882/X6882-vendor.mk)
