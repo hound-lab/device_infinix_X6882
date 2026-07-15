@@ -8,12 +8,6 @@ DEVICE_PATH := device/infinix/X6882
 KERNEL_PATH := $(DEVICE_PATH)-kernel
 CONFIGS_PATH := $(DEVICE_PATH)/configs
 
-# Architecture
-TARGET_ARCH := arm64
-TARGET_ARCH_VARIANT := armv8-2a-dotprod
-TARGET_CPU_ABI := arm64-v8a
-TARGET_CPU_VARIANT := cortex-a76
-
 # Enable 64-bit for non-zygote.
 ZYGOTE_FORCE_64 := true
 
@@ -26,7 +20,12 @@ TARGET_DYNAMIC_64_32_MEDIASERVER := true
 # Include 64-bit drmserver to support 64-bit only devices
 TARGET_DYNAMIC_64_32_DRMSERVER := true
 
-# Build the 32 bit targets
+# Architecture
+TARGET_ARCH := arm64
+TARGET_ARCH_VARIANT := armv8-2a-dotprod
+TARGET_CPU_ABI := arm64-v8a
+TARGET_CPU_VARIANT := cortex-a76
+
 TARGET_2ND_ARCH := arm
 TARGET_2ND_ARCH_VARIANT := armv8-2a
 TARGET_2ND_CPU_ABI := armeabi-v7a
@@ -122,8 +121,6 @@ endif
 BOARD_ODM_DLKMIMAGE_FILE_SYSTEM_TYPE := erofs
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := erofs
 BOARD_VENDOR_DLKMIMAGE_FILE_SYSTEM_TYPE := erofs
-
--include vendor/custom/config/BoardConfigReservedSize.mk
 
 TARGET_COPY_OUT_ODM_DLKM := odm_dlkm
 TARGET_COPY_OUT_PRODUCT := product
