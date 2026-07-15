@@ -483,6 +483,7 @@ PRODUCT_PACKAGES += \
     libprocessgroup_shim \
     libcamera_metadata_shim \
     libstagefright_foundation-v33 \
+    libtinyxml2-v34 \
     libutils-v32 \
     libhidlbase-v32 \
     libbinder-v32
