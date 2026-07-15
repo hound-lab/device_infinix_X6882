@@ -23,8 +23,12 @@ PRODUCT_MODEL := Infinix X6882
 PRODUCT_GMS_CLIENTID_BASE := android-transsion
 PRODUCT_SYSTEM_NAME := X6882-OP
 PRODUCT_SYSTEM_DEVICE := X6882
-    
-BUILD_FINGERPRINT := Infinix/X6882-OP/Infinix-X6882:14/UP1A.231005.007/250715V1600:user/release-keys
+
+PRODUCT_BUILD_PROP_OVERRIDES += \
+    BuildDesc="sys_tssi_64_armv82_infinix-user 14 UP1A.231005.007 980236 release-keys" \
+    BuildFingerprint=Infinix/X6882-OP/Infinix-X6882:14/UP1A.231005.007/260117V1572:user/release-keys \
+    DeviceName=$(PRODUCT_SYSTEM_DEVICE) \
+    DeviceProduct=$(PRODUCT_SYSTEM_NAME)
 
 # Time
 LINEAGE_VERSION_APPEND_TIME_OF_DAY := true
