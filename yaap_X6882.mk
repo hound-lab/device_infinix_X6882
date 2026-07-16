@@ -7,14 +7,14 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit_only.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
-# Inherit some common Lineage stuff.
-$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
+# Inherit some common YAAP stuff.
+$(call inherit-product, vendor/yaap/config/common_full_phone.mk)
 
 # Inherit from X6882 device
 $(call inherit-product, device/infinix/X6882/device.mk)
 
 BOARD_VENDOR := Infinix
-PRODUCT_NAME := lineage_X6882
+PRODUCT_NAME := yaap_X6882
 PRODUCT_DEVICE := X6882
 PRODUCT_MANUFACTURER := INFINIX
 PRODUCT_BRAND := Infinix
@@ -30,5 +30,4 @@ PRODUCT_BUILD_PROP_OVERRIDES += \
     DeviceName=$(PRODUCT_SYSTEM_DEVICE) \
     DeviceProduct=$(PRODUCT_SYSTEM_NAME)
 
-# Time
-LINEAGE_VERSION_APPEND_TIME_OF_DAY := true
+TARGET_BOARD_PLATFORM := mt6789
