@@ -395,7 +395,7 @@ PRODUCT_COPY_FILES += \
 $(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
 
 # Properties
-include $(LOCAL_PATH)/vendor_logtag.mk
+$(call inherit-product, hardware/mediatek/configs/properties/vendor_logtag.mk)
 
 # Protobuf
 PRODUCT_PACKAGES += \
