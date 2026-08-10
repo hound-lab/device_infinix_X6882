@@ -310,6 +310,7 @@ PRODUCT_PACKAGES += \
     SettingsProviderResNoir \
     SystemUIResNoir \
     OpenDeltaOverlayMT6789 \
+    Launcher3Noir \
     WifiResNoir
 
 PRODUCT_PACKAGES += \
