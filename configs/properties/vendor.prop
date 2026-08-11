@@ -77,7 +77,6 @@ persist.sys.fuse.passthrough.enable=true
 # Gatekeeper
 ro.hardware.gatekeeper=trustonic
 
-
 # Graphics
 debug.renderengine.backend=skiavk
 debug.hwui.renderer=skiavk
@@ -150,18 +149,6 @@ ro.vendor.keymaster_version=5.0
 
 # Light
 ro.vendor.transsion.backlight_12bit=1
-
-# LMKD
-ro.lmk.kill_heaviest_task=false
-ro.lmk.use_psi=true
-ro.lmk.use_minfree_levels=false
-ro.lmk.reorder_apps=true
-ro.lmk.kill_timeout_ms=500
-ro.lmk.thrashing_limit=40
-ro.lmk.thrashing_limit_decay=30
-ro.lmk.downgrade_pressure=25
-ro.lmk.upgrade_pressure=80
-ro.lmk.swap_free_low_percentage=15
 
 # Media
 media.c2.hal.selection=aidl
@@ -274,11 +261,6 @@ ro.vendor.num_md_protocol=3
 ro.vendor.radio.max.multisim=dsds
 ro.vendor.sim_me_lock_mode=3
 telephony.active_modems.max_count=2
-
-# RKPD
-remote_provisioning.connect_timeout_millis=2000
-remote_provisioning.enable_rkpd=true
-remote_provisioning.hostname=remoteprovisioning.googleapis.com
 
 # Sensor
 ro.vendor.init.sensor.rc=init.sensor_2_0.rc
