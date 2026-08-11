@@ -126,7 +126,6 @@ ro.incremental.enable=yes
 # HWUI
 debug.hwui.use_hint_manager=true
 debug.hwui.target_cpu_time_percent=60
-debug.sf.enable_adpf_cpu_hint=true
 
 # HWComposer
 ro.vendor.mtk_backlight_hwc_support=0
