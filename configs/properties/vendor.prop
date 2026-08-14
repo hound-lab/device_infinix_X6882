@@ -78,8 +78,6 @@ persist.sys.fuse.passthrough.enable=true
 ro.hardware.gatekeeper=trustonic
 
 # Graphics
-debug.renderengine.backend=skiavk
-debug.hwui.renderer=skiavk
 debug.graphics.game_default_frame_rate.disabled=true
 debug.mediatek.appgamepq_compress=1
 graphics.gpu.profiler.support=true
@@ -164,7 +162,6 @@ vendor.media.heif.feature.off=1
 vendor.media.heif.highThreshold=20
 vendor.mtk.vdec.waitkeyframeforplay=9
 ro.vendor.jpeg_decode_sw_opt=1
-vendor.media.omx=0
 
 # Misc
 persist.vendor.factory.GB2312=no
