@@ -77,10 +77,7 @@ persist.sys.fuse.passthrough.enable=true
 # Gatekeeper
 ro.hardware.gatekeeper=trustonic
 
-
 # Graphics
-debug.renderengine.backend=skiavk
-debug.hwui.renderer=skiavk
 debug.graphics.game_default_frame_rate.disabled=true
 debug.mediatek.appgamepq_compress=1
 graphics.gpu.profiler.support=true
@@ -126,7 +123,6 @@ ro.incremental.enable=yes
 # HWUI
 debug.hwui.use_hint_manager=true
 debug.hwui.target_cpu_time_percent=60
-debug.sf.enable_adpf_cpu_hint=true
 
 # HWComposer
 ro.vendor.mtk_backlight_hwc_support=0
@@ -152,18 +148,6 @@ ro.vendor.keymaster_version=5.0
 # Light
 ro.vendor.transsion.backlight_12bit=1
 
-# LMKD
-ro.lmk.kill_heaviest_task=false
-ro.lmk.use_psi=true
-ro.lmk.use_minfree_levels=false
-ro.lmk.reorder_apps=true
-ro.lmk.kill_timeout_ms=500
-ro.lmk.thrashing_limit=40
-ro.lmk.thrashing_limit_decay=30
-ro.lmk.downgrade_pressure=25
-ro.lmk.upgrade_pressure=80
-ro.lmk.swap_free_low_percentage=15
-
 # Media
 media.c2.hal.selection=aidl
 debug.mediatek.disp_decompress=1
@@ -178,7 +162,6 @@ vendor.media.heif.feature.off=1
 vendor.media.heif.highThreshold=20
 vendor.mtk.vdec.waitkeyframeforplay=9
 ro.vendor.jpeg_decode_sw_opt=1
-vendor.media.omx=0
 
 # Misc
 persist.vendor.factory.GB2312=no
@@ -275,11 +258,6 @@ ro.vendor.num_md_protocol=3
 ro.vendor.radio.max.multisim=dsds
 ro.vendor.sim_me_lock_mode=3
 telephony.active_modems.max_count=2
-
-# RKPD
-remote_provisioning.connect_timeout_millis=2000
-remote_provisioning.enable_rkpd=true
-remote_provisioning.hostname=remoteprovisioning.googleapis.com
 
 # Sensor
 ro.vendor.init.sensor.rc=init.sensor_2_0.rc
