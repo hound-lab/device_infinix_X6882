@@ -884,23 +884,6 @@ on boot
 #Power Manager
     write /sys/power/pm_freeze_timeout 2000
 
-# Battery info
-on property:persist.vendor.mediatek.fg.disable=1
-    write /dev/gauge/FG_daemon_disable 1
-
-on property:persist.vendor.mediatek.fg.force25c=1
-    write /dev/gauge/Battery_Temperature 25
-
-on property:persist.vendor.mediatek.fg.force25c=0
-    write /dev/gauge/Battery_Temperature 65535
-
-on property:persist.vendor.mediatek.fg.log.enable=1
-    write /dev/gauge/FG_daemon_log_level 7
-
-# MTK fast charging support
-on property:persist.vendor.mediatek.fast_charging.support=*
-    write /sys/devices/platform/charger/fast_chg_indicator ${persist.vendor.mediatek.fast_charging.support}
-
 on property:sys.boot_completed=1
     restart android-hardware-media-c2-hal-1-2
     
