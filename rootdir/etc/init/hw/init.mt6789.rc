@@ -417,16 +417,9 @@ on boot
 #Power Manager
     write /sys/power/pm_freeze_timeout 2000
 
+# end boot time fs tune
 on property:sys.boot_completed=1
-    restart android-hardware-media-c2-hal-1-2
-    
-    # Back to default VM settings
     write /proc/sys/vm/dirty_expire_centisecs 3000
-
-on property:sys.boot_completed=1
-# Report max frequency to unity and miHoYo (HoYoverse) games tasks
-    write /proc/sys/kernel/sched_lib_name "com.miHoYo.,com.HoYoverse.,UnityMain,libunity.so"
-    write /proc/sys/kernel/sched_lib_mask_force 255
 
 # OTG
 on property:sys.boot_completed=1
