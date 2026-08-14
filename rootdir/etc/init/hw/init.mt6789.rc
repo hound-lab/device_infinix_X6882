@@ -420,7 +420,3 @@ on boot
 # end boot time fs tune
 on property:sys.boot_completed=1
     write /proc/sys/vm/dirty_expire_centisecs 3000
-
-# OTG
-on property:sys.boot_completed=1
-    write /sys/devices/platform/odm/odm:tran_battery/OTG_CTL 1

@@ -7,9 +7,6 @@ on init
     chown system system /proc/gesture_function
     chmod 0660 /proc/gesture_function
 
-    # OTG
-    write /sys/devices/platform/odm/odm:tran_battery/OTG_CTL 1
-
 on post-fs-data
     chmod 0660 /dev/MAINAF
     chown system camera /dev/MAINAF
@@ -64,3 +61,11 @@ service vendor.nfc_hal_service /vendor/bin/hw/android.hardware.nfc-service.nxp
 
 on early-init
    enable vendor.nfc_hal_service
+
+    #SDD:add OTG feature for TESSCR-6368 by weike.xu 20210512 start
+    chmod 0666 /sys/devices/platform/odm/odm:tran_battery/OTG_CTL
+    #SDD:add OTG feature for TESSCR-6368 by weike.xu 20210512 end
+
+# OTG
+on property:sys.boot_completed=1
+    write /sys/devices/platform/odm/odm:tran_battery/OTG_CTL 1
