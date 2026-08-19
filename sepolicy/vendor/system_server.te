@@ -4,3 +4,9 @@ allow system_server sysfs_vibrator:file { read open getattr write };
 allow system_server app_zygote_tmpfs:file write;
 
 get_prop(system_server, wifi_hal_prop)
+
+# AxBurstEngine
+allow system_server sysfs_devices_system_cpu:dir search;
+allow system_server sysfs_devices_system_cpu:file rw_file_perms;
+allow system_server sysfs_task_turbo:dir search;
+allow system_server sysfs_task_turbo:file rw_file_perms;
