@@ -200,3 +200,6 @@
 /dev/elliptic0            0644   system     system
 /dev/elliptic1            0644   system     system
 #BSP:modify ultrasound support ADYLHBSLA-4 by xinyu.zhao 20220629 end
+
+# PMQoS cpu_dma_latency for AxBurstEngine
+/dev/cpu_dma_latency                    0664   system     system
