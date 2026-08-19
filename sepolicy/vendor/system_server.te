@@ -4,3 +4,12 @@ allow system_server sysfs_vibrator:file { read open getattr write };
 allow system_server app_zygote_tmpfs:file write;
 
 get_prop(system_server, wifi_hal_prop)
+
+# cpufreq + task_turbo policy (AxBurstEngine)
+allow system_server proc_task_turbo:file { read write open };
+allow system_server sysfs_performance:file { read write open };
+allow system_server sysfs_devices_system_cpu:file { read write open };
+allow system_server cpu_policy_subfs:dir search;
+allow system_server cpu_policy_subfs:file { read write open };
+allow system_server kernel:system module_request;
+allow system_server system_file:file { execute execute_no_trans };
