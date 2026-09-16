@@ -506,6 +506,7 @@ $(call soong_config_set_bool,wpa_supplicant_8,wifi_disable_multi_akm,true)
 PRODUCT_PACKAGES += \
     libwifi-hal-wrapper \
     android.hardware.wifi-service \
+    wlan_assistant \
     wpa_supplicant \
     hostapd \
     libkeystore-wifi-hidl:64 \
