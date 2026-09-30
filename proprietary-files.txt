@@ -1299,9 +1299,9 @@ vendor/etc/trancam_filelock.json
 vendor/etc/tran_camprofiles.xml
 
 # Charger
-system/bin/kpoc_charger|a6c901b320ecfdff82741b34c266e64a2f9dc73a378afa0332224aea6bb8e1d8
-system/etc/init/kpoc_charger.rc|a65a45db9c12502aa94145e58503963d515e705a8ec1154a8482e6df0fbc518d
-system/system/lib64/libshowlogo.so|036856ecbffa670508a27eff3fb32333865c45a409570b77ea0d739161afbd27
+system/bin/kpoc_charger|f0bf0e25b8446dd30905b6443114a93ab2fda869
+system/etc/init/kpoc_charger.rc|3fb4409bb355ae302148afac7e65a87423d6d43c
+system/lib64/libshowlogo.so|b7b1e481aaf622ce2560a575b272da5f1239f518
 
 # Connectivity
 vendor/bin/wmt_launcher
