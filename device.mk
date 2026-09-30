@@ -514,5 +514,10 @@ PRODUCT_PACKAGES += \
     libkeystore-wifi-hidl:64 \
     libkeystore-engine-wifi-hidl:64
 
+PRODUCT_PACKAGES += \
+    android.hardware.tetheroffload.config@1.0.vendor:64 \
+    android.hardware.tetheroffload.control@1.0.vendor:64 \
+    android.hardware.tetheroffload.control@1.1.vendor:64
+
 # Inherit the proprietary files
 $(call inherit-product, vendor/infinix/X6882/X6882-vendor.mk)
