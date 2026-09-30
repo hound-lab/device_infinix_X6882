@@ -1304,6 +1304,11 @@ vendor/etc/cam3atms_profiles.xml
 vendor/etc/trancam_filelock.json
 vendor/etc/tran_camprofiles.xml
 
+# Charger
+system/bin/kpoc_charger|a6c901b320ecfdff82741b34c266e64a2f9dc73a378afa0332224aea6bb8e1d8
+system/etc/init/kpoc_charger.rc|a65a45db9c12502aa94145e58503963d515e705a8ec1154a8482e6df0fbc518d
+system/system/lib64/libshowlogo.so|036856ecbffa670508a27eff3fb32333865c45a409570b77ea0d739161afbd27
+
 # Connectivity
 vendor/bin/wmt_launcher
 vendor/bin/wmt_loader
