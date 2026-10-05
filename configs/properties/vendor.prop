@@ -182,12 +182,6 @@ ro.vendor.mtk_nn_quant_preferred=1
 
 # Performance
 ro.vendor.pref_scale_enable_cfg=1
-persist.vendor.pnpmgr.enable=1
-persist.vendor.pnpmgr.gamemode.enable=1
-persist.vendor.pnpmgr.gamerecord.enable=1
-vendor.powerhal.interaction.max=150
-vendor.powerhal.interaction.min=50
-vendor.powerhal.interaction.offset=0
 
 # Platform
 ro.vendor.mediatek.platform=MT6789
