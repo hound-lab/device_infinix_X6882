@@ -32,3 +32,23 @@ PRODUCT_BUILD_PROP_OVERRIDES += \
 
 # Time
 LINEAGE_VERSION_APPEND_TIME_OF_DAY := true
+
+# Axion Device Configuration
+AXION_MAINTAINER := gutssnv
+TARGET_DISABLE_EPPE := true
+TARGET_ENABLE_BLUR := true
+
+# Cpu Configuration
+PERF_GOV_SUPPORTED := true
+PERF_DEFAULT_GOV := reflex
+PERF_ANIM_OVERRIDE := true
+
+BYPASS_CHARGE_SUPPORTED ?= false
+
+# Processor name
+AXION_PROCESSOR := Mediatek_Helio_G100
+
+# Camera information
+AXION_CAMERA_REAR_INFO := 50
+AXION_CAMERA_FRONT_INFO := 8
+
