@@ -3,8 +3,9 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-# API levels
-PRODUCT_SHIPPING_API_LEVEL := 31
+# AAPT
+PRODUCT_AAPT_CONFIG := normal
+PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 
 # A/B
 $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/launch_with_vendor_ramdisk.mk)
@@ -45,10 +46,6 @@ PRODUCT_PACKAGES += \
     checkpoint_gc
 
 PRODUCT_VIRTUAL_AB_COMPRESSION_METHOD := lz4
-
-# AAPT
-PRODUCT_AAPT_CONFIG := normal
-PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 
 # Audio
 $(call soong_config_set,android_hardware_audio,run_64bit,true)
@@ -158,6 +155,9 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     ANGLE
+
+# Dolby
+$(call inherit-product, hardware/dolby/dolby.mk)
 
 # DRM
 PRODUCT_PACKAGES += \
@@ -314,13 +314,8 @@ PRODUCT_PACKAGES += \
     WifiResNoir
 
 PRODUCT_PACKAGES += \
+    ApertureOverlay \
     NcmTetheringOverlay
-
-PRODUCT_PACKAGES += \
-    EmptyPropsOverlay
-
-PRODUCT_PACKAGES += \
-    ApertureOverlay
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -456,6 +451,9 @@ PRODUCT_PACKAGES += \
     libsqlite.vendor \
     libdumpstateutil.vendor
 
+# Shipping Api Level
+PRODUCT_SHIPPING_API_LEVEL := 33
+
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH) \
@@ -463,6 +461,9 @@ PRODUCT_SOONG_NAMESPACES += \
     hardware/mediatek/libmtkperf_client \
     hardware/google/interfaces \
     hardware/google/pixel
+
+# Speed profile services and wifi-service to reduce RAM and storage.
+PRODUCT_SYSTEM_SERVER_COMPILER_FILTER := speed-profile
 
 # Thermal
 PRODUCT_PACKAGES += \
@@ -506,6 +507,7 @@ PRODUCT_PACKAGES += \
 
 # Wi-Fi
 $(call soong_config_set_bool,mediatek_wifi_hal,use_pre_u_qpr2_struct,true)
+$(call soong_config_set_bool,wpa_supplicant_8,wifi_disable_multi_akm,true)
 PRODUCT_PACKAGES += \
     libwifi-hal-wrapper \
     android.hardware.wifi-service \
@@ -513,11 +515,6 @@ PRODUCT_PACKAGES += \
     hostapd \
     libkeystore-wifi-hidl:64 \
     libkeystore-engine-wifi-hidl:64
-
-$(call soong_config_set_bool,wpa_supplicant_8,wifi_disable_multi_akm,true)
-
-PRODUCT_PACKAGES += \
-    NcmTetheringOverlay
 
 # Inherit the proprietary files
 $(call inherit-product, vendor/infinix/X6882/X6882-vendor.mk)
