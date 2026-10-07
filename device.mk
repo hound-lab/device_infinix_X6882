@@ -302,12 +302,12 @@ PRODUCT_PACKAGES += \
 # Overlays
 PRODUCT_ENFORCE_RRO_TARGETS := *
 PRODUCT_PACKAGES += \
-    FrameworksResNoir \
-    SettingsResNoir \
-    SettingsProviderResNoir \
-    SystemUIResNoir \
+    FrameworksResDecryptor \
+    SettingsResDecryptor \
+    SettingsProviderResDecryptor \
+    SystemUIResDecryptor \
     OpenDeltaOverlayMT6789 \
-    WifiResNoir
+    WifiResDecryptor
 
 PRODUCT_PACKAGES += \
     ApertureOverlay \

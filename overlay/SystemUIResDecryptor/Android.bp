@@ -1,4 +1,4 @@
 runtime_resource_overlay {
-    name: "SystemUIResNoir",
+    name: "SystemUIResDecryptor",
     vendor: true
 }

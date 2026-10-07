@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="android.overlay.noir">
+    package="android.overlay.decryptor">
 
     <overlay
         android:isStatic="true"
